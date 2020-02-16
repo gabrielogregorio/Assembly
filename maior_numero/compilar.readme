@@ -1,0 +1,4 @@
+nasm -f elf64 maiorNumero.asm 
+ld -s -o maiorNumero maiorNumero.o
+./maiorNumero 
+
