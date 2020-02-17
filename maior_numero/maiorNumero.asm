@@ -1,9 +1,9 @@
 section .data
-            ; db - Define Byte - 1 Byte
-            ; dw - Define World - 2 Bytes
-  x dd 50   ; dd - Define Double World - 4 Bytes
-            ; dq - Define Quad World - 4 Bytes
-            ; dt - Define Ten World - 10 Bytes
+                  ; db - Define Byte - 1 Byte
+                  ; dw - Define World - 2 Bytes
+  x dd 50         ; dd - Define Double World - 4 Bytes
+                  ; dq - Define Quad World - 4 Bytes
+                  ; dt - Define Ten World - 10 Bytes
 
   y dd 10
   msg1 db 'X maior que Y', 0xa
@@ -18,17 +18,17 @@ global _start
 _start:
   mov eax, DWORD [x]
   mov ebx, DWORD [y]
-  cmp eax, ebx        ; comparacao, vamos usar os saltos condicionais
+  cmp eax, ebx          ; comparacao, vamos usar os saltos condicionais
 
-  jge maior ; desvio condicional, je =, jg>, jge >=, jl <, jle <=, jne !=
+  jge maior             ; desvio condicional, je =, jg>, jge >=, jl <, jle <=, jne !=
 
   mov edx, len2
   mov ecx, msg2
 
-  ; Salto incondicional
-  jmp final
+  
+  jmp final             ; Salto incondicional
 
-maior: ; método, label na real...
+maior:                  ; método, label na real...
   mov edx, len1
   mov ecx, msg1
 

@@ -1,0 +1,11 @@
+# Ver código fonte
+objdump -dM intel compara64
+
+# Veja bibliotecas
+objdump -dM intel compara64
+
+# Compara arquivos
+file compara*
+
+# Mostra ultima saida
+echo $?
