@@ -1,0 +1,63 @@
+## Vendo os arquivos
+(base) gabriel@gabriel-ThinkPad-SL410:~/Assembly/comparaCA64A32$ file prog*
+
+## Executáveis
+progA32: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), statically linked, not stripped
+progA64: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, stripped
+
+# Objeto compartilhado? O programa em C não é um executável
+# Mas sim um objeto de algumas bibliotecas em C
+progC:   ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter
+         /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=e3b97fd39514119ded95b3d2f80ac374a78271bb,
+         for GNU/Linux 3.2.0, not stripped
+
+# Bibliotecas que o programa depende
+# Depende de bibliotecas o programa em C
+(base) gabriel@gabriel-ThinkPad-SL410:~/Assembly/comparaCA64A32$ ldd progC 
+	linux-vdso.so.1 (0x00007ffc838f9000)
+	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f95f5afc000)
+	/lib64/ld-linux-x86-64.so.2 (0x00007f95f5d0d000)
+
+
+
+# ============== Ver o código executável =============== #
+(base) gabriel@gabriel-ThinkPad-SL410:~/Assembly/comparaCA64A32$ objdump -dM intel progA64 
+progA64: formato do arquivo elf64-x86-64
+Desmontagem da seção .text:
+
+0000000000401000 <.text>:
+  401000:	b8 01 00 00 00          mov    eax,0x1
+  401005:	bb 62 00 00 00          mov    ebx,0x62
+  40100a:	cd 80                   int    0x80
+
+(base) gabriel@gabriel-ThinkPad-SL410:~/Assembly/comparaCA64A32$ objdump -dM intel progA32 
+progA32: formato do arquivo elf32-i386
+Desmontagem da seção .text:
+
+08049000 <_start>:
+ 8049000:	b8 01 00 00 00          mov    eax,0x1
+ 8049005:	bb 62 00 00 00          mov    ebx,0x62
+ 804900a:	cd 80                   int    0x80
+(base) gabriel@gabriel-ThinkPad-SL410:~/Assembly/comparaCA64A32$ 
+
+
+
+
+
+
+
+
+
+
+
+# Ver código fonte
+objdump -dM intel compara64
+
+# Veja bibliotecas
+objdump -dM intel compara64
+
+# Compara arquivos
+file compara*
+
+# Mostra ultima saida
+echo $?
