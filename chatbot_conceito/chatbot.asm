@@ -1,5 +1,5 @@
 ; Isso ainda é mato
-
+ 
 SYS_WRITE    equ   4
 STD_OUT      equ   1
 SYS_READ     equ   3
