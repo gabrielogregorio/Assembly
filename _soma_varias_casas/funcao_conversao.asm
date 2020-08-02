@@ -1,12 +1,9 @@
 section .data
-  ; Definimos variávis no formato string
-  v1 dw '129', 0xa    ; Variável Caractere, double world
+  v1 dw '129', 0xa
 
-; Variáveis que você quer
 section .bss
    ; maximo 10 elementos para calcular
    buffer: resb 10
-
 
 section .text
   global _start
@@ -14,28 +11,13 @@ section .text
 _start:
   call converter_valor
   call mostrar_valor
-
-final:
-  ; Finalizar
-  mov eax, 1
-  mov ebx, 0
-  int 0x80
+  _final
 
 converter_valor:
-  lea esi, [v1]
+  lea esi, [v1] ; Endereço de memória efetivo 
   mov ecx, 3
   call string_to_int
-  add eax, 1        ; ADD, Adiciona o elemento a variável, PRIMEIRO ELEMENTO
-  ret
-
-mostrar_valor:
-  lea esi, [buffer]
-  call int_to_string
-  mov eax, 4        ; Vamos setar o valor 4 de saida
-  mov ebx, 1
-  mov ecx, buffer
-  mov edx, 10        ; Tamanho do buffer
-  int 0x80          ; Chamamos a 0x80
+  add eax, 1 
   ret
 
 ; Converte string para inteiro
@@ -44,6 +26,18 @@ mostrar_valor:
 ; saida, eax com o valor
 string_to_int:
   xor ebx, ebx;
+
+mostrar_valor:
+  lea esi, [buffer] ; Endereço de memória efetivo 
+  call int_to_string
+  mov eax, 4        ; Vamos setar o valor 4 de saida
+  mov ebx, 1
+  mov ecx, buffer
+  mov edx, 10        ; Tamanho do buffer
+  int 0x80          ; Chamamos a 0x80
+  ret
+
+
 
 .prox_digito:
     movzx eax, byte[esi]
@@ -75,3 +69,9 @@ int_to_string:
     mov eax, esi
 
     ret
+
+final:
+  ; Finalizar
+  mov eax, 1
+  mov ebx, 0
+  int 0x80
